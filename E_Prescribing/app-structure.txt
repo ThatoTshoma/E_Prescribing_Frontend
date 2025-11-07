@@ -1,0 +1,11 @@
+src
+|_____
+        app
+        |____user
+        |    |_______user.component
+        |    |_______login
+        |____shared
+            |__pipe
+            |    |___first_key.pipe.ts
+            |
+            |______auth.service.ts
