@@ -87,3 +87,14 @@
     padding: 30px;
   }
 }
+.error-message {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 4px;
+ }
+
+input.invalid {
+  border: 1px solid #e74c3c;
+  background-color: #fff6f6;
+}
+
