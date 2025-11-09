@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule  } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Authentication } from '../../shared/services/authentication';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -13,14 +15,14 @@ import { Authentication } from '../../shared/services/authentication';
 export class Login {
   form!: any;
 
-  constructor(public formBuilder: FormBuilder, private service: Authentication) {
+  constructor(public formBuilder: FormBuilder, private service: Authentication, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
-    isSubmitted: boolean = false;
+  isSubmitted: boolean = false;
 
   hasDisplayableError(controlName: string): Boolean {
     const control = this.form.get(controlName);
@@ -29,18 +31,17 @@ export class Login {
   }
 
 
-  onLogin(){
+  onLogin() {
     this.isSubmitted = true;
     if (this.form.valid) {
       this.service.login(this.form.value).subscribe({
         next: (res: any) => {
-          /*this.service.saveToken(res.token);*/
+          this.service.saveToken(res.token);
           /*this.router.navigateByUrl('/dashboard');*/
         },
         error: err => {
-          if (err.status == 400)
-            /*this.toastr.error('Incorrect email or password.', 'Login failed')*/
-              console.log('Incorrect email or password.', 'Login failed');
+          if (err.status == 401)
+           this.toastr.error('Incorrect email or password.', 'Login failed')
 
           else
             console.log('error during login:\n', err);
@@ -48,8 +49,8 @@ export class Login {
       })
     }
 
-  
-    console.log(this.form.value);
+
+    /*console.log(this.form.value);*/
 
   }
 }

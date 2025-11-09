@@ -15,4 +15,19 @@ export class Authentication {
     login(formData: any) {
     return this.http.post(environment.apiBaseUrl + '/Account/Login', formData);
   }
+    saveToken(token: string) {
+    localStorage.setItem(TOKEN_KEY, token)
+  }
+    getToken() {
+    return localStorage.getItem(TOKEN_KEY);
+  }
+    isLoggedIn() {
+    return this.getToken() != null ? true : false;
+  }
+    deleteToken() {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
+
+
 }
