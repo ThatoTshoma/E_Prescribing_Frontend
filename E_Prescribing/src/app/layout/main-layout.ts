@@ -6,6 +6,7 @@ import { HideIfClaimsNotMet } from '../Directives/hide-if-claims-not-met';
 
 @Component({
   selector: 'app-main-layout',
+  standalone: true,
   imports: [RouterOutlet, RouterLink, HideIfClaimsNotMet],
   templateUrl: './main-layout.html',
   styles: ``,

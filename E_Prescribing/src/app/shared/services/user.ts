@@ -13,5 +13,6 @@ export class User {
     getUserProfile() {
     return this.httpClient.get(environment.apiBaseUrl + '/Account/GetUserProfile')
     
+    
   }
 }
